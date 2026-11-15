@@ -1,0 +1,428 @@
+{
+  "metrics": {
+    "planned": 29,
+    "executed": 26,
+    "passed": 26,
+    "failed": 0,
+    "approval_percent": 100.0,
+    "failure_percent": 0.0,
+    "execution_percent": 89.66,
+    "use_cases": [
+      "UC01",
+      "UC02",
+      "UC03",
+      "UC04",
+      "UC05",
+      "UC06",
+      "UC07",
+      "UC08",
+      "UC09",
+      "UC10"
+    ],
+    "use_case_coverage_percent": 100
+  },
+  "cases": [
+    {
+      "id": "TP01",
+      "title": "UC02 valida campos obrigatórios",
+      "related": [
+        "UC02"
+      ],
+      "preconditions": "Sem sessão necessária; função pura.",
+      "steps": "Submeter título, descrição e categoria inválidos.",
+      "expected": "Validação rejeita os dados.",
+      "obtained": "Asserções concluídas sem falha.",
+      "status": "aprovado",
+      "evidence": "docs/test-results.json; domain.test.ts"
+    },
+    {
+      "id": "TP02",
+      "title": "UC04 administrador não assume",
+      "related": [
+        "UC04"
+      ],
+      "preconditions": "Administrador e chamado aberto.",
+      "steps": "Solicitar atribuição com perfil administrador.",
+      "expected": "Atribuição recusada.",
+      "obtained": "Asserções concluídas sem falha.",
+      "status": "aprovado",
+      "evidence": "docs/test-results.json; domain.test.ts"
+    },
+    {
+      "id": "TP03",
+      "title": "UC05 rejeita transição direta para fechado",
+      "related": [
+        "UC05"
+      ],
+      "preconditions": "Técnico responsável; em atendimento.",
+      "steps": "Solicitar mudança direta para Fechado.",
+      "expected": "Transição recusada.",
+      "obtained": "Asserções concluídas sem falha.",
+      "status": "aprovado",
+      "evidence": "docs/test-results.json; domain.test.ts"
+    },
+    {
+      "id": "TP04",
+      "title": "UC07 exige solução",
+      "related": [
+        "UC07"
+      ],
+      "preconditions": "Chamado Solucionado sem solução.",
+      "steps": "Solicitar encerramento confirmado.",
+      "expected": "Encerramento recusado.",
+      "obtained": "Asserções concluídas sem falha.",
+      "status": "aprovado",
+      "evidence": "docs/test-results.json; domain.test.ts"
+    },
+    {
+      "id": "TP05",
+      "title": "UC10 inclui integralmente o dia final em São Paulo",
+      "related": [
+        "UC10"
+      ],
+      "preconditions": "Datas civis válidas.",
+      "steps": "Converter período em limites UTC.",
+      "expected": "Início UTC-03 e fim exclusivo no dia seguinte.",
+      "obtained": "Asserções concluídas sem falha.",
+      "status": "aprovado",
+      "evidence": "docs/test-results.json; domain.test.ts"
+    },
+    {
+      "id": "TP06",
+      "title": "UC10 rejeita datas invertidas ou inexistentes",
+      "related": [
+        "UC10"
+      ],
+      "preconditions": "Função de período disponível.",
+      "steps": "Enviar intervalo invertido e 30 de fevereiro.",
+      "expected": "Ambas entradas rejeitadas.",
+      "obtained": "Asserções concluídas sem falha.",
+      "status": "aprovado",
+      "evidence": "docs/test-results.json; domain.test.ts"
+    },
+    {
+      "id": "TP07",
+      "title": "UC02/ONF04 abertura persiste histórico inicial e padrões",
+      "related": [
+        "ONF04",
+        "UC02"
+      ],
+      "preconditions": "Usuário ativo e categoria existente.",
+      "steps": "Abrir e consultar um chamado.",
+      "expected": "Aberto, Média e exatamente um evento inicial.",
+      "obtained": "Asserções concluídas sem falha.",
+      "status": "aprovado",
+      "evidence": "docs/test-results.json; integration.test.ts"
+    },
+    {
+      "id": "TP08",
+      "title": "UC02 falha não cria chamado parcial",
+      "related": [
+        "UC02"
+      ],
+      "preconditions": "Usuário ativo; UUID de categoria inexistente.",
+      "steps": "Tentar abrir e comparar contagem antes/depois.",
+      "expected": "Erro; nenhum chamado criado.",
+      "obtained": "Asserções concluídas sem falha.",
+      "status": "aprovado",
+      "evidence": "docs/test-results.json; integration.test.ts"
+    },
+    {
+      "id": "TP09",
+      "title": "UC03/ONF03 impede leitura de outro solicitante e filtra listagem",
+      "related": [
+        "ONF03",
+        "UC03"
+      ],
+      "preconditions": "Dois solicitantes ativos.",
+      "steps": "Abrir com um e ler/listar com o outro.",
+      "expected": "Leitura recusada e lista sem registro alheio.",
+      "obtained": "Asserções concluídas sem falha.",
+      "status": "aprovado",
+      "evidence": "docs/test-results.json; integration.test.ts"
+    },
+    {
+      "id": "TP10",
+      "title": "UC04 atribuição concorrente aceita apenas um técnico e um evento",
+      "related": [
+        "UC04"
+      ],
+      "preconditions": "Dois técnicos ativos; chamado versão zero.",
+      "steps": "Disparar duas atribuições simultâneas.",
+      "expected": "Um sucesso, uma rejeição, um responsável, dois eventos totais.",
+      "obtained": "Asserções concluídas sem falha.",
+      "status": "aprovado",
+      "evidence": "docs/test-results.json; integration.test.ts"
+    },
+    {
+      "id": "TP11",
+      "title": "UC04 rejeita administrador e conta inativa",
+      "related": [
+        "UC04"
+      ],
+      "preconditions": "Chamado aberto, administrador e técnico inativo.",
+      "steps": "Tentar atribuição com cada perfil.",
+      "expected": "Operações rejeitadas.",
+      "obtained": "Asserções concluídas sem falha.",
+      "status": "aprovado",
+      "evidence": "docs/test-results.json; integration.test.ts"
+    },
+    {
+      "id": "TP12",
+      "title": "UC05/06/07/09 fluxo completo, proprietário, versão e imutabilidade",
+      "related": [
+        "UC05",
+        "UC06",
+        "UC07",
+        "UC09"
+      ],
+      "preconditions": "Chamado aberto e dois técnicos.",
+      "steps": "Assumir; testar terceiro, versão obsoleta, status, prioridade, solução e encerramento.",
+      "expected": "Somente mudanças válidas; versão seis, sete eventos, solução e data final preservadas.",
+      "obtained": "Asserções concluídas sem falha.",
+      "status": "aprovado",
+      "evidence": "docs/test-results.json; integration.test.ts"
+    },
+    {
+      "id": "TP13",
+      "title": "UC08 restrições próprias, técnico ocupado e e-mail duplicado",
+      "related": [
+        "UC08"
+      ],
+      "preconditions": "Administrador; técnico com chamado não fechado.",
+      "steps": "Desativar/mudar perfil do técnico; desativar próprio admin; repetir e-mail.",
+      "expected": "Todas rejeitadas; usuário comum não administra.",
+      "obtained": "Asserções concluídas sem falha.",
+      "status": "aprovado",
+      "evidence": "docs/test-results.json; integration.test.ts"
+    },
+    {
+      "id": "TP14",
+      "title": "UC08 cadastro, edição e desativação preservam histórico",
+      "related": [
+        "UC08"
+      ],
+      "preconditions": "Administrador ativo.",
+      "steps": "Cadastrar conta fictícia, editar nome e desativar.",
+      "expected": "Conta mantida no banco e inativa.",
+      "obtained": "Asserções concluídas sem falha.",
+      "status": "aprovado",
+      "evidence": "docs/test-results.json; integration.test.ts"
+    },
+    {
+      "id": "TP15",
+      "title": "UC10 totais consistentes e intervalo vazio",
+      "related": [
+        "UC10"
+      ],
+      "preconditions": "Administrador; chamados no banco.",
+      "steps": "Consultar período amplo, vazio, invertido e acesso técnico.",
+      "expected": "Grupos somam total; vazio zero; inválido e técnico recusados.",
+      "obtained": "Asserções concluídas sem falha.",
+      "status": "aprovado",
+      "evidence": "docs/test-results.json; integration.test.ts"
+    },
+    {
+      "id": "TP16",
+      "title": "ONF04 persistência após reconexão",
+      "related": [
+        "ONF04"
+      ],
+      "preconditions": "Registro persistido em PostgreSQL.",
+      "steps": "Desconectar cliente e consultar com nova conexão.",
+      "expected": "Mesmo título persistido; não equivale a reiniciar host.",
+      "obtained": "Asserções concluídas sem falha.",
+      "status": "aprovado",
+      "evidence": "docs/test-results.json; integration.test.ts"
+    },
+    {
+      "id": "TP17",
+      "title": "ONF04 banco rejeita chamado sem histórico e desfaz a gravação",
+      "related": [
+        "ONF04"
+      ],
+      "preconditions": "Conta e categoria existentes.",
+      "steps": "Inserir diretamente sem histórico e contar registros.",
+      "expected": "Trigger rejeita commit; contagem inalterada.",
+      "obtained": "Asserções concluídas sem falha.",
+      "status": "aprovado",
+      "evidence": "docs/test-results.json; integration.test.ts"
+    },
+    {
+      "id": "TP18",
+      "title": "UC01/ONF02 login, inválido, acesso protegido e logout",
+      "related": [
+        "ONF02",
+        "UC01"
+      ],
+      "preconditions": "Seed aplicado; navegador sem sessão.",
+      "steps": "Abrir rota protegida; login inválido e válido; sair.",
+      "expected": "Redirecionamento, mensagem genérica, sessão válida e logout.",
+      "obtained": "Asserções concluídas sem falha.",
+      "status": "aprovado",
+      "evidence": "docs/e2e-results.json; tests/e2e/flows.spec.ts"
+    },
+    {
+      "id": "TP19",
+      "title": "UC02–UC09 fluxo pela interface nos três perfis",
+      "related": [
+        "UC02",
+        "UC03",
+        "UC04",
+        "UC05",
+        "UC06",
+        "UC07",
+        "UC08",
+        "UC09"
+      ],
+      "preconditions": "Seed com três perfis.",
+      "steps": "Abrir; técnico assume, prioriza, pausa, soluciona e fecha; admin abre usuários/relatórios.",
+      "expected": "Fluxo concluído e telas dos perfis acessíveis.",
+      "obtained": "Asserções concluídas sem falha.",
+      "status": "aprovado",
+      "evidence": "docs/e2e-results.json; tests/e2e/flows.spec.ts"
+    },
+    {
+      "id": "TP20",
+      "title": "ONF05 responsividade 360px e teclado",
+      "related": [
+        "ONF05"
+      ],
+      "preconditions": "Seed; Chromium.",
+      "steps": "Entrar na largura indicada, verificar scroll, focar marca e usar Tab.",
+      "expected": "Sem overflow horizontal da lista; foco chega ao link Chamados; screenshot real.",
+      "obtained": "Asserções concluídas sem falha.",
+      "status": "aprovado",
+      "evidence": "docs/e2e-results.json; tests/e2e/flows.spec.ts"
+    },
+    {
+      "id": "TP21",
+      "title": "ONF05 responsividade 768px e teclado",
+      "related": [
+        "ONF05"
+      ],
+      "preconditions": "Seed; Chromium.",
+      "steps": "Entrar na largura indicada, verificar scroll, focar marca e usar Tab.",
+      "expected": "Sem overflow horizontal da lista; foco chega ao link Chamados; screenshot real.",
+      "obtained": "Asserções concluídas sem falha.",
+      "status": "aprovado",
+      "evidence": "docs/e2e-results.json; tests/e2e/flows.spec.ts"
+    },
+    {
+      "id": "TP22",
+      "title": "ONF05 responsividade 1366px e teclado",
+      "related": [
+        "ONF05"
+      ],
+      "preconditions": "Seed; Chromium.",
+      "steps": "Entrar na largura indicada, verificar scroll, focar marca e usar Tab.",
+      "expected": "Sem overflow horizontal da lista; foco chega ao link Chamados; screenshot real.",
+      "obtained": "Asserções concluídas sem falha.",
+      "status": "aprovado",
+      "evidence": "docs/e2e-results.json; tests/e2e/flows.spec.ts"
+    },
+    {
+      "id": "TP23",
+      "title": "ONF06 cookie seguro e CSRF",
+      "related": [
+        "ONF06"
+      ],
+      "preconditions": "Login válido local.",
+      "steps": "Inspecionar cookie e enviar POST com origem estrangeira.",
+      "expected": "HttpOnly, SameSite Lax e HTTP 403; Secure/HTTPS cloud não avaliados.",
+      "obtained": "Asserções concluídas sem falha.",
+      "status": "aprovado",
+      "evidence": "docs/e2e-results.json; tests/e2e/flows.spec.ts"
+    },
+    {
+      "id": "TP24",
+      "title": "UC01 conta inativa, ONF02 sessão expirada e ONF03 endpoints protegidos",
+      "related": [
+        "ONF02",
+        "ONF03",
+        "UC01"
+      ],
+      "preconditions": "Conta inativa de teste e usuário seed.",
+      "steps": "Tentar login inativo; expirar sessão; chamar endpoint sem cookie.",
+      "expected": "Credenciais genéricas, retorno ao login e HTTP 401.",
+      "obtained": "Asserções concluídas sem falha.",
+      "status": "aprovado",
+      "evidence": "docs/e2e-results.json; tests/e2e/flows.spec.ts"
+    },
+    {
+      "id": "TP25",
+      "title": "ONF06 HTTPS público, Secure e autenticação obrigatória",
+      "related": [
+        "ONF06"
+      ],
+      "preconditions": "Produção publicada por HTTPS; contas seed fictícias.",
+      "steps": "Acessar login público; autenticar; inspecionar cookie; testar origem estrangeira e logout.",
+      "expected": "HTTP 200, cookie Secure/HttpOnly/SameSite=Lax; CSRF 403; rota protegida redireciona.",
+      "obtained": "Asserções concluídas sem falha.",
+      "status": "aprovado",
+      "evidence": "docs/deployment-e2e-results.json; tests/deployment/production.spec.ts"
+    },
+    {
+      "id": "TP26",
+      "title": "UC01–UC10 fluxo publicado com banco Neon",
+      "related": [
+        "UC01",
+        "UC02",
+        "UC03",
+        "UC04",
+        "UC05",
+        "UC06",
+        "UC07",
+        "UC08",
+        "UC09",
+        "UC10"
+      ],
+      "preconditions": "Vercel READY e Neon demo acessível.",
+      "steps": "Usuário abre; técnico assume, prioriza, pausa, soluciona e encerra; admin cria, edita e desativa conta e consulta relatório; usuário relê solução.",
+      "expected": "Operações gravadas no Neon e refletidas na interface; dados persistem entre logins.",
+      "obtained": "Asserções concluídas sem falha.",
+      "status": "aprovado",
+      "evidence": "docs/deployment-e2e-results.json; tests/deployment/production.spec.ts"
+    },
+    {
+      "id": "TP27",
+      "title": "Disponibilidade durante 14 dias",
+      "related": [
+        "ONF04"
+      ],
+      "preconditions": "Aplicação publicada ou ambiente de auditoria disponível.",
+      "steps": "Executar verificação no ambiente indicado e registrar evidência.",
+      "expected": "Critério do requisito atendido.",
+      "obtained": "Publicado em 15/11/2026; 14 dias ainda não transcorridos; data de entrega e responsável pendentes.",
+      "status": "bloqueado",
+      "evidence": "Nenhuma evidência de execução."
+    },
+    {
+      "id": "TP28",
+      "title": "Reinício completo do processo em produção",
+      "related": [
+        "ONF04"
+      ],
+      "preconditions": "Aplicação publicada ou ambiente de auditoria disponível.",
+      "steps": "Executar verificação no ambiente indicado e registrar evidência.",
+      "expected": "Critério do requisito atendido.",
+      "obtained": "Reconexão local e releitura entre sessões publicadas aprovadas; reinício controlado ainda não executado.",
+      "status": "não executado",
+      "evidence": "Nenhuma evidência de execução."
+    },
+    {
+      "id": "TP29",
+      "title": "Responsividade de todas as oito telas e revisão completa de teclado",
+      "related": [
+        "ONF01",
+        "ONF05"
+      ],
+      "preconditions": "Aplicação publicada ou ambiente de auditoria disponível.",
+      "steps": "Executar verificação no ambiente indicado e registrar evidência.",
+      "expected": "Critério do requisito atendido.",
+      "obtained": "Teste automatizado de larguras cobre a lista; auditoria completa ainda não executada.",
+      "status": "não executado",
+      "evidence": "Nenhuma evidência de execução."
+    }
+  ]
+}

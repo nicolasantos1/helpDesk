@@ -1,0 +1,13 @@
+.env*
+!.env.example
+.vercel/
+node_modules/
+.next/
+docs/
+output/
+tests/
+test-results/
+playwright-report/
+.github/
+scripts/
+*.tsbuildinfo

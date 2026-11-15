@@ -1,0 +1,104 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+enum Role {
+  USUARIO
+  TECNICO
+  ADMINISTRADOR
+}
+
+enum Status {
+  ABERTO
+  EM_ATENDIMENTO
+  AGUARDANDO
+  SOLUCIONADO
+  FECHADO
+}
+
+enum Priority {
+  BAIXA
+  MEDIA
+  ALTA
+}
+
+model User {
+  id           String    @id @default(uuid()) @db.Uuid
+  name         String
+  email        String    @unique
+  passwordHash String
+  role         Role
+  active       Boolean   @default(true)
+  version      Int       @default(0)
+  sessions     Session[]
+  requested    Ticket[]  @relation("requester")
+  assigned     Ticket[]  @relation("technician")
+  history      History[]
+}
+
+model Session {
+  tokenHash String   @id
+  userId    String   @db.Uuid
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+
+  @@index([expiresAt])
+}
+
+model Category {
+  id      String   @id @default(uuid()) @db.Uuid
+  name    String   @unique
+  tickets Ticket[]
+}
+
+model Ticket {
+  id           Int       @id @default(autoincrement())
+  title        String
+  description  String
+  status       Status    @default(ABERTO)
+  priority     Priority  @default(MEDIA)
+  version      Int       @default(0)
+  createdAt    DateTime  @default(now())
+  closedAt     DateTime?
+  requesterId  String    @db.Uuid
+  requester    User      @relation("requester", fields: [requesterId], references: [id])
+  technicianId String?   @db.Uuid
+  technician   User?     @relation("technician", fields: [technicianId], references: [id])
+  categoryId   String    @db.Uuid
+  category     Category  @relation(fields: [categoryId], references: [id])
+  history      History[]
+  solution     Solution?
+
+  @@index([requesterId, createdAt])
+  @@index([technicianId, status])
+  @@index([status, priority])
+  @@index([createdAt])
+}
+
+model History {
+  id             String   @id @default(uuid()) @db.Uuid
+  ticketId       Int
+  ticket         Ticket   @relation(fields: [ticketId], references: [id])
+  authorId       String   @db.Uuid
+  author         User     @relation(fields: [authorId], references: [id])
+  createdAt      DateTime @default(now())
+  event          String
+  description    String
+  previousStatus Status?
+  newStatus      Status
+
+  @@index([ticketId, createdAt])
+}
+
+model Solution {
+  ticketId    Int      @id
+  ticket      Ticket   @relation(fields: [ticketId], references: [id])
+  description String
+  createdAt   DateTime @default(now())
+}

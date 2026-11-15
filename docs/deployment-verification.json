@@ -1,0 +1,42 @@
+{
+  "url": "https://helpdeskiweti.vercel.app",
+  "project": "helpdesk-best-project",
+  "team": "iweti-team",
+  "deploymentId": "dpl_EQAkZ4Y85Hot1TSDLt36RvuwPm5b",
+  "target": "production",
+  "state": "READY",
+  "source": "local workspace, branch tunicate, uncommitted changes; no main push",
+  "framework": "Next.js 16.4.6",
+  "node": "24.x",
+  "region": "iad1",
+  "buildSeconds": 23,
+  "verification": {
+    "startTime": "2026-11-15T20:06:28.514Z",
+    "duration": 21110.589,
+    "expected": 2,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "runtimeErrorScan": {
+    "type": "summary",
+    "recordsReturned": 0,
+    "timeRange": {
+      "start": "2026-11-15T20:01:53.954Z",
+      "end": "2026-11-15T20:06:53.954Z"
+    },
+    "pagination": {
+      "hasMore": false,
+      "next": null
+    },
+    "excludedIntervals": []
+  },
+  "observedAt": "2026-11-15T20:07:06.227332+00:00",
+  "monitoring": "one-time scan; continuous monitoring and 14-day availability not yet established",
+  "drains": "not checked",
+  "redirect": {
+    "from": "https://helpdesk-best-project.vercel.app",
+    "to": "https://helpdeskiweti.vercel.app",
+    "status": 308
+  }
+}
